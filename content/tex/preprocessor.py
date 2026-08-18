@@ -7,7 +7,62 @@
 import sys
 import getopt
 import subprocess
+import hashlib
+import re
 
+def compute_line_hash(lines_chunk):
+    code = "\n".join(lines_chunk)
+    # Remove comentarios C++
+    code = re.sub(r'//.*?$|/\*.*?\*/', '', code, flags=re.MULTILINE|re.DOTALL)
+    # Remove todos os espacos
+    clean = re.sub(r'\s+', '', code)
+    
+    if not clean:
+        return ""
+        
+    md5_hash = hashlib.md5(clean.encode('utf-8')).hexdigest()
+    return md5_hash[:3]
+
+def inject_hashes(lines):
+    depth = 0
+    st = []
+    out_lines = []
+    
+    for i, line in enumerate(lines):
+        start_line = i
+        
+        # Rastreia blocos de chaves
+        for char in line:
+            if char == '{':
+                depth += 1
+                st.append(i)
+            elif char == '}':
+                depth -= 1
+                if st:
+                    start_line = st.pop()
+                    
+        stripped = line.strip()
+        is_comment = not stripped or stripped.startswith("//") or stripped.startswith("/*")
+        
+        # MÁGICA: Converte Tabs em 2 espaços para ganhar espaço na coluna!
+        line = line.replace('\t', '  ')
+        
+        if not is_comment:
+            chunk = lines[start_line : i + 1]
+            h = compute_line_hash(chunk)
+            
+            if h:
+                # O comando agora será lido corretamente pelo LaTeX
+                out_lines.append(f"(*@{{\\tiny \\textcolor{{black}}{{{h}}}}}@*) {line}")
+            else:
+                out_lines.append(line)
+        else:
+            if depth != 0 and stripped:
+                out_lines.append(f"    {line}")
+            else:
+                out_lines.append(line)
+                
+    return out_lines
 
 def escape(input):
     input = input.replace('<', r'\ensuremath{<}')
@@ -173,8 +228,17 @@ def processwithcomments(caption, instream, outstream, listingslang):
             out.append(r"\leftcaption{%s}" % pathescape(", ".join(includelist)))
         if nsource:
             out.append(r"\rightcaption{%s%d lines}" % (hsh, len(nsource.split("\n"))))
-        langstr = ", language="+listingslang
+            
+        # 1. FORÇAMOS O ESCAPE AQUI:
+        langstr = ", language=" + listingslang + r", escapeinside={(*@}{@*)}"
+        
         out.append(r"\begin{lstlisting}[caption={%s}%s]" % (pathescape(caption), langstr))
+        
+        # 2. INJETAMOS OS HASHES AQUI:
+        if listingslang in ['C++', 'Java']:
+            lines_to_hash = nsource.split('\n')
+            nsource = '\n'.join(inject_hashes(lines_to_hash))
+            
         out.append(nsource)
         out.append(r"\end{lstlisting}")
 
