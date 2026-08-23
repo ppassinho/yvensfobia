@@ -20,5 +20,8 @@ List of contents added to this TRD which are not in KACTL.
 * [MinkowskiSum](./content/geometry/MinkowskiSum.h)
 * [HalfPlaneIntersection](./content/geometry/HalfPlaneIntersection.h)
 
+### Strings
+* [SuffixAutomaton](./content/strings/SuffixAutomaton.h)
+
 ### Various
 * [SumOverSubsets](./content/various/SumOverSubsets.h)
