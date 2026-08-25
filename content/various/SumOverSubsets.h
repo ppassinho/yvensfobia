@@ -15,7 +15,7 @@
 vector<ll> sos(vector<ll> a) {
 	int n = __lg(sz(a));
 	rep(i, 0, n) rep(x, 0, 1 << n) {
-		if (x & (1 << i)) a[x] += a[x ^ (1 << i)];
+		if (x & (1 << i)) a[x] += a[x ^ (1 << i)]; // ~x & (1 << i) for superset
 	}
 	return a;
 }
