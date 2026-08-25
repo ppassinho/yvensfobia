@@ -25,6 +25,7 @@ List of contents added to this TRD which are not in KACTL.
 
 ### Number Theory
 * [PrimitiveRoot](./content/number-theory/PrimitiveRoot.h)
+* [MobiusFunction](./content/number-theory/MobiusFunction.h)
 
 ### Strings
 * [SuffixAutomaton](./content/strings/SuffixAutomaton.h)
