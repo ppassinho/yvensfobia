@@ -21,7 +21,6 @@ List of contents added to this TRD which are not in KACTL.
 * [HalfPlaneIntersection](./content/geometry/HalfPlaneIntersection.h)
 
 ### Number Theory
-* [PollardRho](./content/number-theory/PollardRho.h)
 * [PrimitiveRoot](./content/number-theory/PrimitiveRoot.h)
 
 ### Strings

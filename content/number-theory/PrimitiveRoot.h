@@ -10,11 +10,11 @@
  */
 #pragma once
 
-#include "PollardRho.h"
+#include "Factor.h"
 
 ll prim_root(ll p) {
     if (p == 2) return 1;
-    auto facts = fact(p - 1);
+    auto facts = factor(p - 1);
     
     sort(facts.begin(), facts.end());
     facts.erase(unique(facts.begin(), facts.end()), facts.end());
