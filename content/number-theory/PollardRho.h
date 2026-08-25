@@ -4,7 +4,7 @@
  * License: CC0
  * Source: https://github.com/yosupo06/library-checker-problems/blob/master/number_theory/factorize/sol/rho_with_difference_of_square.cpp
  * Description: Factorization algorithm, not necessarily ordered.
- * Guaranteed to work for numbers up to $\cdot 10^{18}$.
+ * Guaranteed to work for numbers up to $10^{18}$.
  * Time: rho is O(n^(1/4)) in worst case,
  * fact is O(n^(1/4) log(n)) in worst case
  * Status: Tested on Yusupo "Factorize"

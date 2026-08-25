@@ -22,6 +22,7 @@ List of contents added to this TRD which are not in KACTL.
 
 ### Number Theory
 * [PollardRho](./content/number-theory/PollardRho.h)
+* [PrimitiveRoot](./content/number-theory/PrimitiveRoot.h)
 
 ### Strings
 * [SuffixAutomaton](./content/strings/SuffixAutomaton.h)
