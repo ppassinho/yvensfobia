@@ -3,7 +3,7 @@
  * Date: 2026-08-25
  * License: CC0
  * Source: https://cp-algorithms.com/algebra/primitive-root.html
- * Description: Finds the Primitive Root of a prime number.
+ * Description: Finds the smallest Primitive Root of a given prime number.
  * Guaranteed to work for numbers up to $10^{18}$.
  * Time: O(p^{1/4}) expected time
  * Status: Tested on Yusupo "Primitive Root"
