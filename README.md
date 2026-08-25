@@ -20,6 +20,9 @@ List of contents added to this TRD which are not in KACTL.
 * [MinkowskiSum](./content/geometry/MinkowskiSum.h)
 * [HalfPlaneIntersection](./content/geometry/HalfPlaneIntersection.h)
 
+### Number Theory
+* [PollardRho](./content/number-theory/PollardRho.h)
+
 ### Strings
 * [SuffixAutomaton](./content/strings/SuffixAutomaton.h)
 
