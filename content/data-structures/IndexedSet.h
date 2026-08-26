@@ -5,6 +5,8 @@
  * Source: kactl, Competitive Programmer’s Handbook
  * Description: Similar to OrderStatisticTree,
  * but uses a different library which may be more portable.
+ * change less to less\_equal for multiset
+ * (this breaks the erase(value) function)
  */
 #pragma once
 

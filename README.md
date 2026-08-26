@@ -11,6 +11,7 @@ Please note the PDF may contain more than 25 pages, the limit for TRDs in The IC
 List of contents added to this TRD which are not in KACTL.
 
 ### Contest
+* [hash2](./content/contest/hash2.sh)
 * [hashCheck](./content/contest/hashCheck.h)
 
 ### Data structures
