@@ -25,21 +25,15 @@ def compute_line_hash(lines_chunk):
 
 def inject_hashes(lines):
     depth = 0
-    st = []
     out_lines = []
     
     for i, line in enumerate(lines):
-        start_line = i
-        
-        # Rastreia blocos de chaves
+        # We still track depth for the comment indentation logic later
         for char in line:
             if char == '{':
                 depth += 1
-                st.append(i)
             elif char == '}':
                 depth -= 1
-                if st:
-                    start_line = st.pop()
                     
         stripped = line.strip()
         is_comment = not stripped or stripped.startswith("//") or stripped.startswith("/*")
@@ -48,7 +42,8 @@ def inject_hashes(lines):
         line = line.replace('\t', '  ')
         
         if not is_comment:
-            chunk = lines[start_line : i + 1]
+            # CUMULATIVE HASH: Pass everything from line 0 up to the current line
+            chunk = lines[0 : i + 1]
             h = compute_line_hash(chunk)
             
             if h:
@@ -57,6 +52,7 @@ def inject_hashes(lines):
             else:
                 out_lines.append(line)
         else:
+            # Preserve KACTL's comment auto-indentation behavior inside blocks
             if depth != 0 and stripped:
                 out_lines.append(f"    {line}")
             else:
